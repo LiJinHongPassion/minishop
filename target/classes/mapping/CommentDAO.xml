@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.CommentDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.Comment">
+    <id column="c_id" jdbcType="VARCHAR" property="cId" />
+    <result column="c_user_id" jdbcType="VARCHAR" property="cUserId" />
+    <result column="c_product_id" jdbcType="VARCHAR" property="cProductId" />
+    <result column="c_order_id" jdbcType="VARCHAR" property="cOrderId" />
+    <result column="c_time" jdbcType="TIMESTAMP" property="cTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, c_user_id, c_product_id, c_order_id, c_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from comment
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.Comment">
+    insert into comment (c_id, c_user_id, c_product_id, 
+      c_order_id, c_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cProductId,jdbcType=VARCHAR}, 
+      #{cOrderId,jdbcType=VARCHAR}, #{cTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="cUserId != null">
+        c_user_id,
+      </if>
+      <if test="cProductId != null">
+        c_product_id,
+      </if>
+      <if test="cOrderId != null">
+        c_order_id,
+      </if>
+      <if test="cTime != null">
+        c_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserId != null">
+        #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cProductId != null">
+        #{cProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="cOrderId != null">
+        #{cOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null">
+        #{cTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.minishop.entity.Comment">
+    update comment
+    <set>
+      <if test="cUserId != null">
+        c_user_id = #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cProductId != null">
+        c_product_id = #{cProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="cOrderId != null">
+        c_order_id = #{cOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null">
+        c_time = #{cTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.minishop.entity.Comment">
+    update comment
+    set c_user_id = #{cUserId,jdbcType=VARCHAR},
+      c_product_id = #{cProductId,jdbcType=VARCHAR},
+      c_order_id = #{cOrderId,jdbcType=VARCHAR},
+      c_time = #{cTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

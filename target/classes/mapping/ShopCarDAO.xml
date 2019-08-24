@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.ShopCarDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.ShopCar">
+    <id column="sc_Id" jdbcType="VARCHAR" property="scId" />
+    <result column="sc_user_id" jdbcType="VARCHAR" property="scUserId" />
+    <result column="sc_product_id" jdbcType="VARCHAR" property="scProductId" />
+    <result column="sc_num" jdbcType="INTEGER" property="scNum" />
+    <result column="sc_attribute" jdbcType="VARCHAR" property="scAttribute" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sc_Id, sc_user_id, sc_product_id, sc_num, sc_attribute
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_car
+    where sc_Id = #{scId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shop_car
+    where sc_Id = #{scId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.ShopCar">
+    insert into shop_car (sc_Id, sc_user_id, sc_product_id, 
+      sc_num, sc_attribute)
+    values (#{scId,jdbcType=VARCHAR}, #{scUserId,jdbcType=VARCHAR}, #{scProductId,jdbcType=VARCHAR}, 
+      #{scNum,jdbcType=INTEGER}, #{scAttribute,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.ShopCar">
+    insert into shop_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scId != null">
+        sc_Id,
+      </if>
+      <if test="scUserId != null">
+        sc_user_id,
+      </if>
+      <if test="scProductId != null">
+        sc_product_id,
+      </if>
+      <if test="scNum != null">
+        sc_num,
+      </if>
+      <if test="scAttribute != null">
+        sc_attribute,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scId != null">
+        #{scId,jdbcType=VARCHAR},
+      </if>
+      <if test="scUserId != null">
+        #{scUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="scProductId != null">
+        #{scProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="scNum != null">
+        #{scNum,jdbcType=INTEGER},
+      </if>
+      <if test="scAttribute != null">
+        #{scAttribute,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.minishop.entity.ShopCar">
+    update shop_car
+    <set>
+      <if test="scUserId != null">
+        sc_user_id = #{scUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="scProductId != null">
+        sc_product_id = #{scProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="scNum != null">
+        sc_num = #{scNum,jdbcType=INTEGER},
+      </if>
+      <if test="scAttribute != null">
+        sc_attribute = #{scAttribute,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sc_Id = #{scId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.minishop.entity.ShopCar">
+    update shop_car
+    set sc_user_id = #{scUserId,jdbcType=VARCHAR},
+      sc_product_id = #{scProductId,jdbcType=VARCHAR},
+      sc_num = #{scNum,jdbcType=INTEGER},
+      sc_attribute = #{scAttribute,jdbcType=VARCHAR}
+    where sc_Id = #{scId,jdbcType=VARCHAR}
+  </update>
+</mapper>
