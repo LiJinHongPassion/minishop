@@ -70,12 +70,11 @@
         </dependency>
 
         <!--fstdfs client-start-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27-SNAPSHOT</version>
-        </dependency>
-
+        </dependency>-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
