@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.ProductCategoryDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.ProductCategory">
+    <id column="pc_id" jdbcType="VARCHAR" property="pcId" />
+    <result column="pc_name" jdbcType="VARCHAR" property="pcName" />
+    <result column="pc_next_id" jdbcType="VARCHAR" property="pcNextId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pc_id, pc_name, pc_next_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_category
+    where pc_id = #{pcId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_category
+    where pc_id = #{pcId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.ProductCategory">
+    insert into product_category (pc_id, pc_name, pc_next_id
+      )
+    values (#{pcId,jdbcType=VARCHAR}, #{pcName,jdbcType=VARCHAR}, #{pcNextId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.ProductCategory">
+    insert into product_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pcId != null">
+        pc_id,
+      </if>
+      <if test="pcName != null">
+        pc_name,
+      </if>
+      <if test="pcNextId != null">
+        pc_next_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pcId != null">
+        #{pcId,jdbcType=VARCHAR},
+      </if>
+      <if test="pcName != null">
+        #{pcName,jdbcType=VARCHAR},
+      </if>
+      <if test="pcNextId != null">
+        #{pcNextId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.minishop.entity.ProductCategory">
+    update product_category
+    <set>
+      <if test="pcName != null">
+        pc_name = #{pcName,jdbcType=VARCHAR},
+      </if>
+      <if test="pcNextId != null">
+        pc_next_id = #{pcNextId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pc_id = #{pcId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.minishop.entity.ProductCategory">
+    update product_category
+    set pc_name = #{pcName,jdbcType=VARCHAR},
+      pc_next_id = #{pcNextId,jdbcType=VARCHAR}
+    where pc_id = #{pcId,jdbcType=VARCHAR}
+  </update>
+</mapper>

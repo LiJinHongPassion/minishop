@@ -18,7 +18,7 @@ public class BeanRegisterConfig {
         //过滤器注册类
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new MyFilter());
-        registration.addUrlPatterns("/user/hello"); //需要过滤的接口
+        registration.addUrlPatterns("/user/hello");
         return registration;
     }
 }

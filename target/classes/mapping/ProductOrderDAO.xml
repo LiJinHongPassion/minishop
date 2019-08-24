@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.ProductOrderDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.ProductOrder">
+    <id column="po_id" jdbcType="VARCHAR" property="poId" />
+    <result column="po_user_id" jdbcType="VARCHAR" property="poUserId" />
+    <result column="po_product_id" jdbcType="VARCHAR" property="poProductId" />
+    <result column="po_num" jdbcType="INTEGER" property="poNum" />
+    <result column="po_price" jdbcType="DECIMAL" property="poPrice" />
+    <result column="po_start_time" jdbcType="TIMESTAMP" property="poStartTime" />
+    <result column="po_finish_time" jdbcType="TIMESTAMP" property="poFinishTime" />
+    <result column="po_status" jdbcType="TINYINT" property="poStatus" />
+    <result column="product_status" jdbcType="INTEGER" property="productStatus" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    po_id, po_user_id, po_product_id, po_num, po_price, po_start_time, po_finish_time, 
+    po_status, product_status, product_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_order
+    where po_id = #{poId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_order
+    where po_id = #{poId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.ProductOrder">
+    insert into product_order (po_id, po_user_id, po_product_id, 
+      po_num, po_price, po_start_time, 
+      po_finish_time, po_status, product_status, 
+      product_price)
+    values (#{poId,jdbcType=VARCHAR}, #{poUserId,jdbcType=VARCHAR}, #{poProductId,jdbcType=VARCHAR}, 
+      #{poNum,jdbcType=INTEGER}, #{poPrice,jdbcType=DECIMAL}, #{poStartTime,jdbcType=TIMESTAMP}, 
+      #{poFinishTime,jdbcType=TIMESTAMP}, #{poStatus,jdbcType=TINYINT}, #{productStatus,jdbcType=INTEGER}, 
+      #{productPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.ProductOrder">
+    insert into product_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="poId != null">
+        po_id,
+      </if>
+      <if test="poUserId != null">
+        po_user_id,
+      </if>
+      <if test="poProductId != null">
+        po_product_id,
+      </if>
+      <if test="poNum != null">
+        po_num,
+      </if>
+      <if test="poPrice != null">
+        po_price,
+      </if>
+      <if test="poStartTime != null">
+        po_start_time,
+      </if>
+      <if test="poFinishTime != null">
+        po_finish_time,
+      </if>
+      <if test="poStatus != null">
+        po_status,
+      </if>
+      <if test="productStatus != null">
+        product_status,
+      </if>
+      <if test="productPrice != null">
+        product_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="poId != null">
+        #{poId,jdbcType=VARCHAR},
+      </if>
+      <if test="poUserId != null">
+        #{poUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="poProductId != null">
+        #{poProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="poNum != null">
+        #{poNum,jdbcType=INTEGER},
+      </if>
+      <if test="poPrice != null">
+        #{poPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="poStartTime != null">
+        #{poStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poFinishTime != null">
+        #{poFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poStatus != null">
+        #{poStatus,jdbcType=TINYINT},
+      </if>
+      <if test="productStatus != null">
+        #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productPrice != null">
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.minishop.entity.ProductOrder">
+    update product_order
+    <set>
+      <if test="poUserId != null">
+        po_user_id = #{poUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="poProductId != null">
+        po_product_id = #{poProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="poNum != null">
+        po_num = #{poNum,jdbcType=INTEGER},
+      </if>
+      <if test="poPrice != null">
+        po_price = #{poPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="poStartTime != null">
+        po_start_time = #{poStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poFinishTime != null">
+        po_finish_time = #{poFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poStatus != null">
+        po_status = #{poStatus,jdbcType=TINYINT},
+      </if>
+      <if test="productStatus != null">
+        product_status = #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productPrice != null">
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where po_id = #{poId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.minishop.entity.ProductOrder">
+    update product_order
+    set po_user_id = #{poUserId,jdbcType=VARCHAR},
+      po_product_id = #{poProductId,jdbcType=VARCHAR},
+      po_num = #{poNum,jdbcType=INTEGER},
+      po_price = #{poPrice,jdbcType=DECIMAL},
+      po_start_time = #{poStartTime,jdbcType=TIMESTAMP},
+      po_finish_time = #{poFinishTime,jdbcType=TIMESTAMP},
+      po_status = #{poStatus,jdbcType=TINYINT},
+      product_status = #{productStatus,jdbcType=INTEGER},
+      product_price = #{productPrice,jdbcType=DECIMAL}
+    where po_id = #{poId,jdbcType=VARCHAR}
+  </update>
+</mapper>
