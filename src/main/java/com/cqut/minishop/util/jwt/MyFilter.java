@@ -1,6 +1,5 @@
-package com.cqut.minishop.filter;
+package com.cqut.minishop.util.jwt;
 
-import com.cqut.minishop.util.JwtService;
 import io.jsonwebtoken.Claims;
 
 import javax.servlet.*;
@@ -29,12 +28,12 @@ public class MyFilter implements Filter {
         response.setCharacterEncoding("utf-8");
         String token = request.getHeader("authorization"); //获取请求传来的token
         if( token == null){
-            ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/test");
+            ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/login");
             return;
         }
         Claims claims = JwtService.parsePersonJWT(token); //验证token
         if (claims == null) {
-            ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/test");
+            ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/login");
 
         }else {
             filterChain.doFilter(request,response);

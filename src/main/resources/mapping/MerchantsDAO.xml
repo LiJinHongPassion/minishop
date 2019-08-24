@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.MerchantsDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.Merchants">
+    <id column="mId" jdbcType="VARCHAR" property="mid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from merchants
+    where mId = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.Merchants">
+    insert into merchants (mId)
+    values (#{mid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.Merchants">
+    insert into merchants
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

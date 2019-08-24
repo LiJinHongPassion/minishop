@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.minishop.dao.ProductDAO">
+  <cache type="com.cqut.minishop.util.mybatis.MybatisRedisCache" />
+  <resultMap id="BaseResultMap" type="com.cqut.minishop.entity.Product">
+    <id column="p_id" jdbcType="VARCHAR" property="pId" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_price" jdbcType="DECIMAL" property="pPrice" />
+    <result column="p_repertory" jdbcType="INTEGER" property="pRepertory" />
+    <result column="p_pic" jdbcType="VARCHAR" property="pPic" />
+    <result column="p_category_Id" jdbcType="VARCHAR" property="pCategoryId" />
+    <result column="p_detailInfo" jdbcType="VARCHAR" property="pDetailinfo" />
+    <result column="p_status" jdbcType="TINYINT" property="pStatus" />
+    <result column="p_address" jdbcType="VARCHAR" property="pAddress" />
+    <result column="p_classification" jdbcType="VARCHAR" property="pClassification" />
+    <result column="p_next_classification" jdbcType="VARCHAR" property="pNextClassification" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    p_id, p_name, p_price, p_repertory, p_pic, p_category_Id, p_detailInfo, p_status, 
+    p_address, p_classification, p_next_classification
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where p_id = #{pId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where p_id = #{pId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cqut.minishop.entity.Product">
+    insert into product (p_id, p_name, p_price, 
+      p_repertory, p_pic, p_category_Id, 
+      p_detailInfo, p_status, p_address, 
+      p_classification, p_next_classification)
+    values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, 
+      #{pRepertory,jdbcType=INTEGER}, #{pPic,jdbcType=VARCHAR}, #{pCategoryId,jdbcType=VARCHAR}, 
+      #{pDetailinfo,jdbcType=VARCHAR}, #{pStatus,jdbcType=TINYINT}, #{pAddress,jdbcType=VARCHAR}, 
+      #{pClassification,jdbcType=VARCHAR}, #{pNextClassification,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.minishop.entity.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+      <if test="pPrice != null">
+        p_price,
+      </if>
+      <if test="pRepertory != null">
+        p_repertory,
+      </if>
+      <if test="pPic != null">
+        p_pic,
+      </if>
+      <if test="pCategoryId != null">
+        p_category_Id,
+      </if>
+      <if test="pDetailinfo != null">
+        p_detailInfo,
+      </if>
+      <if test="pStatus != null">
+        p_status,
+      </if>
+      <if test="pAddress != null">
+        p_address,
+      </if>
+      <if test="pClassification != null">
+        p_classification,
+      </if>
+      <if test="pNextClassification != null">
+        p_next_classification,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null">
+        #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pRepertory != null">
+        #{pRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="pPic != null">
+        #{pPic,jdbcType=VARCHAR},
+      </if>
+      <if test="pCategoryId != null">
+        #{pCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="pDetailinfo != null">
+        #{pDetailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pStatus != null">
+        #{pStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pAddress != null">
+        #{pAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pClassification != null">
+        #{pClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="pNextClassification != null">
+        #{pNextClassification,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.minishop.entity.Product">
+    update product
+    <set>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null">
+        p_price = #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pRepertory != null">
+        p_repertory = #{pRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="pPic != null">
+        p_pic = #{pPic,jdbcType=VARCHAR},
+      </if>
+      <if test="pCategoryId != null">
+        p_category_Id = #{pCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="pDetailinfo != null">
+        p_detailInfo = #{pDetailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pStatus != null">
+        p_status = #{pStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pAddress != null">
+        p_address = #{pAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pClassification != null">
+        p_classification = #{pClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="pNextClassification != null">
+        p_next_classification = #{pNextClassification,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.minishop.entity.Product">
+    update product
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_price = #{pPrice,jdbcType=DECIMAL},
+      p_repertory = #{pRepertory,jdbcType=INTEGER},
+      p_pic = #{pPic,jdbcType=VARCHAR},
+      p_category_Id = #{pCategoryId,jdbcType=VARCHAR},
+      p_detailInfo = #{pDetailinfo,jdbcType=VARCHAR},
+      p_status = #{pStatus,jdbcType=TINYINT},
+      p_address = #{pAddress,jdbcType=VARCHAR},
+      p_classification = #{pClassification,jdbcType=VARCHAR},
+      p_next_classification = #{pNextClassification,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=VARCHAR}
+  </update>
+</mapper>

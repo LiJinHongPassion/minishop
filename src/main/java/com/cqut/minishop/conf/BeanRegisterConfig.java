@@ -1,6 +1,6 @@
 package com.cqut.minishop.conf;
 
-import com.cqut.minishop.filter.MyFilter;
+import com.cqut.minishop.util.jwt.MyFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.cqut.minishop.util;
+package com.cqut.minishop.util.jwt;
 
 import io.jsonwebtoken.*;
 

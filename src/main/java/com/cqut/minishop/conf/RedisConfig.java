@@ -1,4 +1,4 @@
-package com.cqut.minishop.redis.config;
+package com.cqut.minishop.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +35,8 @@ public class RedisConfig {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         JedisPoolConfig config = getRedisConfig();
         factory.setPoolConfig(config);
-        factory.setHostName("127.0.0.1");
-        factory.setPassword("");
+        factory.setHostName("47.103.202.12");
+        factory.setPassword("123456");
         factory.setPort(6379);
         return factory;
     }

@@ -1,4 +1,4 @@
-package com.cqut.minishop.redis;
+package com.cqut.minishop.util.mybatis;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

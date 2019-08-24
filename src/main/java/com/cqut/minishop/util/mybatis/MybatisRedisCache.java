@@ -1,4 +1,4 @@
-package com.cqut.minishop.redis;
+package com.cqut.minishop.util.mybatis;
 
 import org.apache.ibatis.cache.Cache;
 import org.springframework.data.redis.core.RedisTemplate;
