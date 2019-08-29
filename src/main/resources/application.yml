@@ -2,6 +2,7 @@ server:
   port: 8080
   servlet.context-path: /minishop
 
+
 spring:
   datasource:
     url: jdbc:mysql://47.103.202.12:3306/sys-minishop?useUnicode=true&characterEncoding=utf8
@@ -29,6 +30,14 @@ spring:
     timeout: 100ms
     lettuce:
       shutdown-timeout: 100ms
+  mvc:
+    static-path-pattern:
+      - /static/**
+      - /upload/**
+  resources:
+    static-locations:
+      - /static/**
+      - /upload/**
 
 
 mybatis:
@@ -41,3 +50,11 @@ mybatis:
     lazy-loading-enabled: false
     aggressive-lazy-loading: true
     default-statement-timeout: 25000
+
+# 邮箱
+spring.mail.host: smtp.163.com
+spring.mail.username: yang13260906172@163.com
+spring.mail.password: yang13260906172
+spring.mail.default-encoding: UTF-8
+
+mail.fromMail.addr: yang13260906172@163.com
