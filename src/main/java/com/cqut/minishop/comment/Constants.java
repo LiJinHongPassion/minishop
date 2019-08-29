@@ -12,8 +12,8 @@ public class Constants {
     /**
      *     全局默认状态，包括正常、异常、删除的数字和字符串
      */
-    public static final int GLOBAL_NORMAL_STATUS_INT =  1 ;
-    public static final int GLOBAL_ERROR_STATUS_INT =  0 ;
+    public static final int GLOBAL_NORMAL_STATUS_INT =  200 ;
+    public static final int GLOBAL_ERROR_STATUS_INT =  500 ;
 
     //验证码有效时间 3分钟
     public static final long VERIFICATION_CODE_TIMA = 60 * 3;

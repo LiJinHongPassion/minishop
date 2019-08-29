@@ -46,6 +46,48 @@ public class AccountController {
         return "hello";
     }
 
+
+    /**
+     * 描述: 注销账号
+     *
+     * @author LJH-1755497577 2019/8/29 22:43
+     * @param userId
+     * @return com.cqut.minishop.comment.Result
+     */
+    @PostMapping("cancel")
+    public Result cancellation(@RequestParam("userid") String userId){
+        try {
+            userService.changeStatus(userId, -1);
+            return new Result(true, null, "注销成功，mini商城祝愿您身体健康，万事如意！");
+        }catch (Exception e){
+            return new Result(false, "服务器异常！");
+        }
+    }
+
+
+
+    /**
+     * 描述: 更新资料，用户id为必填项
+     *
+     * @author LJH-1755497577 2019/8/29 22:02
+     * @param user
+     * @return com.cqut.minishop.comment.Result
+     */
+    @PostMapping("update")
+    public Result UpdateById(User user){
+        if (StringUtils.isEmpty(user.getUserId())){
+            return new Result(false, "服务器繁忙");
+        }
+
+        User user_update = null;
+        try {
+            user_update = userService.updateByPrimaryKeySelective(user);
+        }catch (Exception e){
+            return new Result(false, "服务器繁忙，更新失败");
+        }
+        return new Result(true, null, user_update);
+    }
+
     /**
      * 描述: 发送邮件验证码
      *
@@ -77,17 +119,20 @@ public class AccountController {
      */
     @PostMapping("saveHeadPic")
     public Result saveHeadPic(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-
         Result result = new Result();
-        String temp = handleFormUploadByByte(file, request);
-        if ( temp != null){
-            //成功
-            temp = IP_PORT_ADDRESS + "/" + USRE_PIC_PATH + temp;
-            result.setCode(GLOBAL_NORMAL_STATUS_INT);
-            result.setData(temp);
-            return result;
+        try {
+            String temp = handleFormUploadByByte(file, request);
+            if ( temp != null){
+                //成功
+                temp = IP_PORT_ADDRESS + "/" + USRE_PIC_PATH + temp;
+                result.setCode(GLOBAL_NORMAL_STATUS_INT);
+                result.setData(temp);
+                return result;
+            }
+        }catch (Exception e){
+            result.setCode(GLOBAL_ERROR_STATUS_INT);
+            result.setErrorMessage("上传失败");
         }
-
         result.setCode(GLOBAL_ERROR_STATUS_INT);
         result.setErrorMessage("上传失败");
         return result;
@@ -101,14 +146,12 @@ public class AccountController {
      * @param userName
      * @param password
      * @param response
-     * @param request
      * @return com.cqut.minishop.comment.Result
      */
     @PostMapping("login")
     public Result login(@RequestParam("username")String userName,
                         @RequestParam("password")String password,
-                        HttpServletResponse response,
-                        HttpServletRequest request){
+                        HttpServletResponse response){
 
         Map<String, Object> map = new HashMap<>();
         map.put("name", userName);
@@ -121,7 +164,7 @@ public class AccountController {
         }
 
         //验证密码
-        String pwd = MD5Utils.getMd5Hash(password, userName).toString();
+        String pwd = MD5Utils.getMd5Hash(password, user.getUserId()).toString();
         if(pwd.equals(user.getUserPassword())){
             //1:已登录 0：未登录 -1：已注销
             //1. 账户状态为未登录
@@ -133,7 +176,8 @@ public class AccountController {
                 }catch (Exception e){
                     return new Result(false, "服务器繁忙");
                 }
-                return new Result(true, null);
+                user.setUserPassword("");
+                return new Result(true, null, user);
             }else if(user_status == -1){
                 return new Result(false, "用户已注销");
             }
@@ -172,6 +216,7 @@ public class AccountController {
             return new Result(false,"注册失败");
         }
     }
+
 
     /**
      * 描述: 验证验证码

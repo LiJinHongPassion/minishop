@@ -8,7 +8,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class MybatisRedisCache implements Cache {
 
-    //id为mapper的namespace，id来为每个namespace对应一个redis的hash结构，在clear时只删掉本namespace的缓存即可
     private String id;
 
     //读写锁

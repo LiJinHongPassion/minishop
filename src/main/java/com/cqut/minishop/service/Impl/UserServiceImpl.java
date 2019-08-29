@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional( rollbackFor = Exception.class)
     public int save(User user) {
         user.setUserId(EntityIDUtil.createId());
-        user.setUserPassword(MD5Utils.getMd5Hash(user.getUserPassword(), user.getUserName()).toString());
+        user.setUserPassword(MD5Utils.getMd5Hash(user.getUserPassword(), user.getUserId()).toString());
 
         user.setUserPic(IP_PORT_ADDRESS + "/" + USRE_PIC_PATH + "/default.jpg");
         user.setUserStatus(0);
@@ -40,4 +40,21 @@ public class UserServiceImpl implements IUserService {
     public void changeStatus(String userId, int status) {
         userDAO.changeStatus(userId, status);
     }
+
+    @Override
+    @Transactional( rollbackFor = Exception.class)
+    public User updateByPrimaryKeySelective(User user) {
+
+        if(user.getUserPassword() != null){
+            user.setUserPassword(MD5Utils.getMd5Hash(user.getUserPassword(), user.getUserId()).toString());
+        }
+
+        userDAO.updateByPrimaryKeySelective(user);
+
+        User user_temp = userDAO.selectByPrimaryKey(user.getUserId());
+        user_temp.setUserPassword("");
+        return user_temp;
+    }
+
+
 }
