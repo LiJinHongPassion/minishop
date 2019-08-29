@@ -31,4 +31,15 @@ public interface IUserService {
      * @return void
      */
     void changeStatus(String userId, int status);
+
+    /**
+     * 描述: 更新用户部分或者全部属性
+     *
+     * @author LJH-1755497577 2019/8/29 21:53
+     * @param user
+     * @return com.cqut.minishop.entity.User 返回更新后的用户
+     */
+    User updateByPrimaryKeySelective(User user);
+
+
 }

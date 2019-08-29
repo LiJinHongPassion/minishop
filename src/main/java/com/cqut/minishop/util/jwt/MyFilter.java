@@ -26,12 +26,12 @@ public class MyFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
         response.setCharacterEncoding("utf-8");
-        String token = request.getHeader("authorization"); //获取请求传来的token
+        String token = request.getHeader("authorization");
         if( token == null){
             ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/login");
             return;
         }
-        Claims claims = JwtService.parsePersonJWT(token); //验证token
+        Claims claims = JwtService.parsePersonJWT(token);
         if (claims == null) {
             ((HttpServletResponse) servletResponse).sendRedirect("http://localhost:8080/minishop/user/login");
 
