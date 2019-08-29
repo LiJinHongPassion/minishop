@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDAO extends MyBatisBaseDao<User, String> {
     User selectByUserName(String userName);
+
+    void changeStatus(String userId, int status);
 }
