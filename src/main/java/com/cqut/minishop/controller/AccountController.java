@@ -66,7 +66,7 @@ public class AccountController {
 	 * @author LJH-1755497577 2019/8/29 22:02
 	 */
 	@PostMapping("update")
-	public Result UpdateById(User user) {
+	public Result updateById(User user) {
 		if (StringUtils.isEmpty(user.getUserId())) {
 			return new Result(false, "服务器繁忙");
 		}
@@ -209,6 +209,20 @@ public class AccountController {
 		}
 	}
 
+	/**
+	 * 描述: 图形验证码（登录需要）
+	 *
+	 * @author gp
+	 * @param res
+	 * @param resp
+	 * @return void
+	 */
+	@GetMapping("image")
+	public void image( HttpServletRequest res ,HttpServletResponse resp )throws Exception {
+		ImageCode imageCode=new ImageCode();
+		String random = imageCode.createImage(resp,res);
+		System.out.println(random);
+	}
 
 	/**
 	 * 描述: 验证验证码
@@ -223,11 +237,11 @@ public class AccountController {
 			return new Result(false, "请输入验证码");
 		}
 
-		if (!VerificationCodeUtils.VerifyTime(user.getUserName())) {
+		if (!VerificationCodeUtils.verifyTime(user.getUserName())) {
 			return new Result(false, "验证码过期");
 		}
 
-		if (!VerificationCodeUtils.Verify(user.getUserName(), code)) {
+		if (!VerificationCodeUtils.verify(user.getUserName(), code)) {
 			return new Result(false, "验证码错误");
 		}
 		return null;
@@ -258,19 +272,6 @@ public class AccountController {
 		return null;
 	}
 
-	/**
-	 * 描述: 图形验证码（登录需要）
-	 *
-	 * @author gp
-	 * @param res
-	 * @param resp
-	 * @return void
-	 */
-	@RequestMapping("image")
-	public void image( HttpServletRequest res ,HttpServletResponse resp )throws Exception {
-		ImageCode imageCode=new ImageCode();
-		String random=imageCode.Image(resp,res);
-		System.out.println(random);
-	}
+
 
 }

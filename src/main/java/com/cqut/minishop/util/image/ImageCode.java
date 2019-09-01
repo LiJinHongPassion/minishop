@@ -25,7 +25,16 @@ public class ImageCode {
 			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
 			'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-	public String Image(HttpServletResponse resp, HttpServletRequest req)throws Exception {
+
+	/**
+	 * 描述: 创建验证码并提交流
+	 *
+	 * @author LJH-1755497577 2019/9/1 12:02
+	 * @param resp
+	 * @param req
+	 * @return java.lang.String 验证码
+	 */
+	public String createImage(HttpServletResponse resp, HttpServletRequest req)throws Exception {
 		// 定义图像buffer
 		BufferedImage buffImg = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_RGB);
@@ -80,7 +89,6 @@ public class ImageCode {
 		}
 		// 将四位数字的验证码保存到Session中。
 		HttpSession session = req.getSession();
-		System.out.print(randomCode);
 		session.setAttribute("code", randomCode.toString());
 
 		// 禁止图像缓存。
@@ -94,7 +102,7 @@ public class ImageCode {
 		ServletOutputStream sos = resp.getOutputStream();
 		ImageIO.write(buffImg, "jpeg", sos);
 		//sos.close();
-		return random.toString();
+		return randomCode.toString();
 	}
 
 }

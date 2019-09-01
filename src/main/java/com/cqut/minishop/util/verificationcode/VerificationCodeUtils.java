@@ -46,7 +46,7 @@ public class VerificationCodeUtils {
      * @param code 验证码
      * @return boolean 成功：true   失败：false
      */
-    public static boolean Verify(String userName, String code){
+    public static boolean verify(String userName, String code){
 
         for( int a = 0; a < codeList.size(); a++ ){
             VerificationCode c = codeList.get(a);
@@ -73,7 +73,7 @@ public class VerificationCodeUtils {
      * @param userName
      * @return boolean
      */
-    public static boolean VerifyTime(String userName){
+    public static boolean verifyTime(String userName){
         long temp_time = System.currentTimeMillis() / 1000;
         for( int a = 0; a < codeList.size(); a++ ){
             VerificationCode c = codeList.get(a);

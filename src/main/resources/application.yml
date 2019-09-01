@@ -2,7 +2,6 @@ server:
   port: 8080
   servlet.context-path: /minishop
 
-
 spring:
   datasource:
     url: jdbc:mysql://47.103.202.12:3306/sys-minishop?useUnicode=true&characterEncoding=utf8
@@ -39,10 +38,9 @@ spring:
       - /static/**
       - /upload/**
 
-
 mybatis:
-  mapper-locations: classpath:mapping/*.xml  #\u6CE8\u610F\uFF1A\u4E00\u5B9A\u8981\u5BF9\u5E94mapper\u6620\u5C04xml\u6587\u4EF6\u7684\u6240\u5728\u8DEF\u5F84
-  type-aliases-package: com.cqut.minishop.entity  # \u6CE8\u610F\uFF1A\u5BF9\u5E94\u5B9E\u4F53\u7C7B\u7684\u8DEF\u5F84
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.cqut.minishop.entity
   configuration:
     cache-enabled: true
     multiple-result-sets-enabled: true
