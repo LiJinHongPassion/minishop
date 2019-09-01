@@ -15,22 +15,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Parameter;
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.cqut.minishop.comment.Constants.*;
 
 /**
- * 描述：登录、注册、邮件验证码、用户头像上传
+ * 描述：登录、注册、邮件验证码、用户头像上传、图形验证码
  *
  * @author LJH
  * @date 2019/7/16-6:16
@@ -44,14 +39,6 @@ public class AccountController {
 	private IUserService userService;
 	@Resource
 	private IMailService mailService;
-
-	//需要token验证才能访问
-	@RequestMapping("hello")
-	public String user() {
-
-		return "hello";
-	}
-
 
 	/**
 	 * 描述: 注销账号
@@ -271,15 +258,19 @@ public class AccountController {
 		return null;
 	}
 
+	/**
+	 * 描述: 图形验证码（登录需要）
+	 *
+	 * @author gp
+	 * @param res
+	 * @param resp
+	 * @return void
+	 */
 	@RequestMapping("image")
-	@ResponseBody
-	public Result image( HttpServletRequest res ,HttpServletResponse resp )throws Exception {
-		Result result = new Result();
+	public void image( HttpServletRequest res ,HttpServletResponse resp )throws Exception {
 		ImageCode imageCode=new ImageCode();
 		String random=imageCode.Image(resp,res);
-
 		System.out.println(random);
-		return result;
 	}
 
 }

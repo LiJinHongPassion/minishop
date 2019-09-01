@@ -1,7 +1,5 @@
 package com.cqut.minishop.util.image;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
+ * 描述：图形验证码工具
  * @time 2019/9/1 9:56
  * @Author gp
  */
