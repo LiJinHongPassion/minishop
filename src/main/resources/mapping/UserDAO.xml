@@ -122,4 +122,12 @@
     from user
     where user_name = #{userName}
   </select>
+
+  <update id="changeStatus">
+    update user
+    set user_status = #{status,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+
+
 </mapper>

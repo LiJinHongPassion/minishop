@@ -31,6 +31,18 @@ public class Result {
         }
     }
 
+    public Result(boolean isSuccess, String errorMessage, Object data){
+        if(isSuccess){
+            code = Constants.GLOBAL_NORMAL_STATUS_INT;
+            this.errorMessage = null;
+            this.data = data;
+        }else{
+            code = Constants.GLOBAL_ERROR_STATUS_INT;
+            this.errorMessage = errorMessage;
+            this.data = null;
+        }
+    }
+
     public int getCode() {
         return code;
     }

@@ -29,11 +29,18 @@ spring:
     timeout: 100ms
     lettuce:
       shutdown-timeout: 100ms
-
+  mvc:
+    static-path-pattern:
+      - /static/**
+      - /upload/**
+  resources:
+    static-locations:
+      - /static/**
+      - /upload/**
 
 mybatis:
-  mapper-locations: classpath:mapping/*.xml  #\u6CE8\u610F\uFF1A\u4E00\u5B9A\u8981\u5BF9\u5E94mapper\u6620\u5C04xml\u6587\u4EF6\u7684\u6240\u5728\u8DEF\u5F84
-  type-aliases-package: com.cqut.minishop.entity  # \u6CE8\u610F\uFF1A\u5BF9\u5E94\u5B9E\u4F53\u7C7B\u7684\u8DEF\u5F84
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.cqut.minishop.entity
   configuration:
     cache-enabled: true
     multiple-result-sets-enabled: true
@@ -41,3 +48,11 @@ mybatis:
     lazy-loading-enabled: false
     aggressive-lazy-loading: true
     default-statement-timeout: 25000
+
+# 邮箱
+spring.mail.host: smtp.163.com
+spring.mail.username: yang13260906172@163.com
+spring.mail.password: yang13260906172
+spring.mail.default-encoding: UTF-8
+
+mail.fromMail.addr: yang13260906172@163.com
