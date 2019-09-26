@@ -38,6 +38,7 @@ public class RedisConfig {
         factory.setHostName("47.103.202.12");
         factory.setPassword("123456");
         factory.setPort(6379);
+        factory.setDatabase(0);
         return factory;
     }
 
