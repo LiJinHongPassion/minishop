@@ -240,7 +240,7 @@ public class AccountController {
 		if (!VerificationCodeUtils.verifyTime(user.getUserName())) {
 			return new Result(false, "验证码过期");
 		}
-
+		//这里验证码必须一样(大小写)
 		if (!VerificationCodeUtils.verify(user.getUserName(), code)) {
 			return new Result(false, "验证码错误");
 		}
